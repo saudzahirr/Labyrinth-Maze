@@ -1,0 +1,12 @@
+*cache*
+*.py[cod]
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.so*
+*.lib
+*.lib*
+*.a
+.vscode
