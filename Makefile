@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -O2
 TARGET = labyrinth.out
 SRC = labyrinth.c
 
-CASES = case/case-1.txt case/case-2.txt case/case-3.txt case/case-4.txt case/case-5.txt case/case-6.txt
+CASES = 1 2 3 4 5 6 7
 
 all: $(TARGET)
 
@@ -14,7 +14,7 @@ $(TARGET): $(SRC)
 test: $(TARGET)
 	@for case in $(CASES); do \
 		echo "Running $$case ..."; \
-		./$(TARGET) $$case; \
+		./$(TARGET) case/case-$$case.txt; \
 		echo ""; \
 	done
 
