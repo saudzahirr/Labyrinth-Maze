@@ -121,7 +121,7 @@ void computeNumberOfGates(NodePtr topLeft, int* gates) {
     do {
         if (ptr->right and not ptr->up) {
             if (ptr->value % 2 == 0) {
-                if (ptr->value == 0 and (not ptr->left or not ptr->right)) {
+                if (ptr->value == 0 and not ptr->left) {
                     *gates += 2;
                 }
                 else if (ptr->value == 2 and not ptr->right) {}
@@ -129,12 +129,15 @@ void computeNumberOfGates(NodePtr topLeft, int* gates) {
                     *gates += 1;
                 }
             }
+            else if (ptr->value == 1 and not ptr->left and not ptr->up) {
+                *gates += 1;
+            }
             ptr = ptr->right;
         }
 
-        else if (!ptr->right and ptr->down) {
+        else if (not ptr->right and ptr->down) {
             if (ptr->value == 0) {
-                *gates += (ptr->down->value == 0 and not ptr->down->down) ? 2 : 1;
+                *gates += 1;
             }
             ptr = ptr->down;
         }
@@ -147,15 +150,16 @@ void computeNumberOfGates(NodePtr topLeft, int* gates) {
         }
 
         else if (not ptr->left and ptr->up) {
-            ptr = ptr->up;
-            if ((ptr->value == 0 and ptr->up) or ptr->value == 1) {
+            if (ptr->value == 0) {
                 *gates += 1;
             }
+            else if (ptr->value == 1 and ptr->down) {
+                *gates += 1;
+            }
+            ptr = ptr->up;
         }
 
-        else {
-            break;
-        }
+        else break;
 
     } while (ptr != topLeft);
 }
